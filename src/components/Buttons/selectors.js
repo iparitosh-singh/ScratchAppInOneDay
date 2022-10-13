@@ -1,9 +1,10 @@
 import React from 'react'
-import { MotionButtonTypes, EventButtonTypes, ControlButtonTypes } from '../constants'
+import { MotionButtonTypes, EventButtonTypes, ControlButtonTypes, LooksButtonTypes } from '../constants'
 
 import {MoveSteps, TurnLeft, TurnRight} from './MotionButtons'
 import { StartClicked, StripeClicked } from './EventButtons'
-import {Wait, Repeat} from './ControlButton'
+import {Wait, Repeat} from './ControlButtons'
+import { NextCostume, Say } from './LookButtons'
 
 
 export const MotionSelectors = (name) => {
@@ -32,5 +33,14 @@ export const ControlSelector = (name) => {
             return <Repeat />
         case ControlButtonTypes.WAIT:
             return <Wait />
+    }
+}
+
+export const LooksSelector = (name) => {
+    switch(name) {
+        case LooksButtonTypes.SAY:
+            return <Say />
+        case LooksButtonTypes.NEXTCOSTUME:
+            return <NextCostume />
     }
 }

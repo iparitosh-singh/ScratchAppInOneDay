@@ -11,6 +11,8 @@ const selectSelector = (type) => {
             return selectors.EventSelctors;
         case ButtonTypes.CONTROL:
             return selectors.ControlSelector;
+        case ButtonTypes.LOOKS:
+            return selectors.LooksSelector;
     }
 }
 
@@ -36,7 +38,7 @@ const Button = ({
         })
     }))
     if(isInside && isDragging) 
-    return <div ref={drag}></div>
+        return <div ref={drag}></div>
     return (
         <div ref={drag} style={{ maxWidth: '200px', ...pos, position: isInside ? 'absolute' : ''}}>
             {selector(name)}

@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "./Buttons";
-import {EventButtonTypes, MotionButtonTypes, ButtonTypes, ControlButtonTypes} from './constants'
+import {EventButtonTypes, MotionButtonTypes, ButtonTypes, ControlButtonTypes, LooksButtonTypes} from './constants'
 
 export default function Sidebar() {
   return (
@@ -16,6 +16,10 @@ export default function Sidebar() {
       <div className="font-bold"> {"Control"} </div>
       {Object.keys(ControlButtonTypes).map((key, index) => {
         return <Button type={ButtonTypes.CONTROL} name={ControlButtonTypes[key]} key={index}/>
+      })}
+      <div className="font-bold"> {"Looks"} </div>
+      {Object.keys(LooksButtonTypes).map((key, index) => {
+        return <Button type={ButtonTypes.LOOKS} name={LooksButtonTypes[key]} key={index}/>
       })}
     </div>
   );

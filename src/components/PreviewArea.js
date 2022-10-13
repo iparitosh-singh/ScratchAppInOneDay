@@ -20,7 +20,9 @@ const preveiwAreaStyles = {
 const spriteInPreviewStyles = {
   width: '100px', 
   height: '100px',
-  position: 'absolute'
+  position: 'absolute',
+  borderRadius: '20px'
+
 }
 
 

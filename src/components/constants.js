@@ -1,7 +1,8 @@
 export const ButtonTypes = {
     MOTION: 'MOTION',
     EVENT: 'EVENT',
-    CONTROL: 'CONTROL'
+    CONTROL: 'CONTROL',
+    LOOKS: 'LOOKS'
 }
 export const MotionButtonTypes = {
     MOVE: "MOVE",
@@ -21,6 +22,5 @@ export const ControlButtonTypes = {
 
 export const LooksButtonTypes = {
     SAY: 'SAY',
-    HIDE: 'HIDE',
-
+    NEXTCOSTUME: 'NEXTCOSTUME',
 }

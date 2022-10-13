@@ -21,6 +21,8 @@ const getButton = (button, key) => {
             return <Button type={ButtonTypes.EVENT} {...props} />
         case ButtonTypes.CONTROL:
             return <Button type={ButtonTypes.CONTROL} {...props} />
+        case ButtonTypes.LOOKS:
+            return <Button type={ButtonTypes.LOOKS} {...props} />
     }
 }
 
