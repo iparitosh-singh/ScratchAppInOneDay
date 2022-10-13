@@ -58,7 +58,7 @@ const Editor = () => {
             
             const {x: left, y: top} = monitor.getSourceClientOffset();
             const pos = {
-                left: left - 190,
+                left: left - 216,
                 top: top - 20
             }
 

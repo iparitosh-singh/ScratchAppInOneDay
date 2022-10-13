@@ -23,53 +23,40 @@ const spriteInPreviewStyles = {
   position: 'absolute'
 }
 
-const getPositionByIdInit = (stripes = []) => {
-  return stripes.reduce((posById, stripe) => {
-    return {
-      ...posById,
-      [stripe.id]: {
-        left: 0,
-        top: 0
-      }
-    }
-  }, {})
-}
 
 export default function PreviewArea() {
-  const {stripes, selectedStripeId} = useStoreState((state) => state)
-  const {addStripe, setSelectedStripe} = useStoreActions((actions) => actions)
-  const [positionById, setPositionById] = useState(getPositionByIdInit(stripes))
-  const moveSprite = useCallback((left, top, id) => {
-    setPositionById({
-      ...positionById,
-      [id]: {
-        left, top
-      }
-    })
-  }, [setPositionById, positionById])
+  const stripes = useStoreState((state) => state.stripes)
+  const {selectedStripeId} = useStoreState((state) => state)
+  const {addStripe, setSelectedStripe, updateStripePosition} = useStoreActions((actions) => actions)
 
   const [, drop] = useDrop(() => ({
     accept: 'SPRITE',
     drop(item, monitor) {
       const delta = monitor.getDifferenceFromInitialOffset()
-      const left = Math.round(positionById[item.id].left + delta.x)
-      const top = Math.round(positionById[item.id].top + delta.y)
+      const left = Math.round(item.left + delta.x)
+      const top = Math.round(item.top + delta.y)
       moveSprite(left, top, item.id)
       return undefined
     }
-  }), [positionById, setPositionById])
+  }), [stripes, updateStripePosition])
 
+  const moveSprite = (left, top, id) => {
+    updateStripePosition({
+      id, left, top
+    })
+  }
   const handleAddStripe = () => {
     const randomIdx = Math.floor(Math.random() * (STRIPES.length))
     const id = Math.floor(Math.random() * 1000)
-    setSelectedStripe(id)
     const newStripe = {
       component: STRIPES[randomIdx],
       buttons: {},
+      top: 0, left: 0,
       id,
     }
-    moveSprite(0, 0, id)
     addStripe(newStripe)
+    setSelectedStripe(id)
+    moveSprite(0, 0, id)
   }
   return (
     <div className="w-100 flex-1 h-full overflow-y-auto p-2 flex-col" >
@@ -77,9 +64,10 @@ export default function PreviewArea() {
         {stripes.map(stripe => 
           <SpritePreview
             id={stripe.id}
-            left={positionById[stripe.id].left}
-            top={positionById[stripe.id].top}
+            left={stripe.left}
+            top={stripe.top}
             key={stripe.id}
+            onClick={() => setSelectedStripe(stripe.id)}
             >
             {React.cloneElement(stripe.component, { key: stripe.id, style: spriteInPreviewStyles })}
           </SpritePreview>
