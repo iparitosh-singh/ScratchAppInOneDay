@@ -7,7 +7,7 @@ export const Wait= (props) => {
     return (
         <div className="flex flex-row flex-wrap bg-indigo-500 text-white px-2 py-1 my-2 text-sm cursor-pointer">
             Wait
-            {value && <input
+            {value !== undefined && <input
                 value={value}
                 onChange={(e) => props.setValue(e.target.value)}
                 type='number'
@@ -28,7 +28,7 @@ export const Repeat = (props) => {
     return (
       <div className="flex flex-row flex-wrap bg-indigo-500 text-white px-2 py-1 my-2 text-sm cursor-pointer">
             Repeat 
-            {value && <input
+            {value !== undefined && <input
                 value={value}
                 onChange={(e) => props.setValue(e.target.value)}
                 type='number'
