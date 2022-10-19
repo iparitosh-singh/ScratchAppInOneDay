@@ -23,7 +23,6 @@ const SpritePreview = ({children, id, left, top}) => {
     const handleClick = () => {
         const stripe = stripes.find((stripe) => stripe.id === id)
         const newStyles = getClasses(stripe.buttons)
-        console.log(newStyles)
         setStyles({...styles, ...newStyles})
     }
     

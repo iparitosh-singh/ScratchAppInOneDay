@@ -22,5 +22,4 @@ export const ControlButtonTypes = {
 
 export const LooksButtonTypes = {
     SAY: 'SAY',
-    NEXTCOSTUME: 'NEXTCOSTUME',
 }

@@ -79,7 +79,9 @@ const Editor = () => {
         <div style = {{
                 height: '100%',
                 width: 'auto',
-                position: 'relative'
+                position: 'relative',
+                border: '1px black solid'
+
             }}
             ref={drop}
         >

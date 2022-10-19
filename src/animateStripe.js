@@ -1,5 +1,4 @@
-import { ButtonTypes, MotionButtonTypes } from "./components/constants"
-
+import { ButtonTypes, LooksButtonTypes, MotionButtonTypes } from "./components/constants"
 
 export const getClasses = (buttons) => {
     return Object.values(buttons)
@@ -15,7 +14,7 @@ export const getClasses = (buttons) => {
                     case MotionButtonTypes.MOVE:
                         return {
                             ...styles, 
-                            transform: styles.transform ? styles.transform + ` translate(${button.value}px)` :`translate(${button.value}px)`  
+                            transform: styles.transform ? styles.transform + ` translate(${button.value * 10}px)` :`translate(${button.value}px)`  
                         }
                     case MotionButtonTypes.LEFT:
                         return {
@@ -31,6 +30,14 @@ export const getClasses = (buttons) => {
                         return styles
                 }
             }
+            case ButtonTypes.LOOKS:
+                case LooksButtonTypes.SAY:
+                    setTimeout(() => {
+                        alert(`Stipe said ${button.value}`)
+                    }, 1000)
+                    return {
+                        ...styles,
+                    }
             default:
                 return styles
         }
