@@ -12,7 +12,7 @@ export const StartClicked = () => {
 }
 
 export const StripeClicked = () => {
-    return (
+  return (
       <div className="flex flex-row flex-wrap bg-yellow-500 text-white px-2 py-1 my-2 text-sm cursor-pointer">
         {"When this sprite clicked"}
       </div>

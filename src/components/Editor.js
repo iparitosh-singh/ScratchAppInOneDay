@@ -6,13 +6,14 @@ import Button from './Buttons'
 import { ButtonTypes } from './constants'
 
 const getButton = (button, key) => {
-    const {left, top, name, type} = button
+    const {left, top, name, type, value} = button
     const props = {
         name,
         pos: {left, top},
         key,
         id: key,
-        isInside: true 
+        isInside: true,
+        value
     }
     switch(type) {
         case ButtonTypes.MOTION:
@@ -43,13 +44,14 @@ const Editor = () => {
                 left: pos.left, 
                 top: pos.top,
                 type: type,
-                name: item.name
+                name: item.name,
+                value: item.value,
             }
         }
         setStripeButtons({
             id: selectedStripeId,
             button: {
-                ...buttonPosition
+                ...buttonPosition,
             }
         })
     }
@@ -57,7 +59,6 @@ const Editor = () => {
     const [_, drop] = useDrop(() => ({
         accept: Object.keys(ButtonTypes).map(type => ButtonTypes[type]),
         drop: (item, monitor) => {
-            
             const {x: left, y: top} = monitor.getSourceClientOffset();
             const pos = {
                 left: left - 216,

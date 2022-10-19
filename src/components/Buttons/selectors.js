@@ -7,40 +7,40 @@ import {Wait, Repeat} from './ControlButtons'
 import { NextCostume, Say } from './LookButtons'
 
 
-export const MotionSelectors = (name) => {
+export const MotionSelectors = (name, props) => {
     switch (name) {
         case MotionButtonTypes.MOVE:
-            return <MoveSteps />
+            return <MoveSteps {...props} />
         case MotionButtonTypes.RIGHT:
-            return <TurnLeft />
+            return <TurnLeft {...props}/>
         case MotionButtonTypes.LEFT:
-            return <TurnRight />
+            return <TurnRight {...props}/>
     }
 }
 
-export const EventSelctors = (name) => {
+export const EventSelctors = (name, props) => {
     switch(name) {
         case EventButtonTypes.STARTCLICKED:
-            return <StartClicked />
+            return <StartClicked {...props}/>
         case EventButtonTypes.STRIPCLICKED:
-            return <StripeClicked />
+            return <StripeClicked {...props}/>
     }
 }
 
-export const ControlSelector = (name) => {
+export const ControlSelector = (name, props) => {
     switch(name){
         case ControlButtonTypes.REPEAT:
-            return <Repeat />
+            return <Repeat {...props}/>
         case ControlButtonTypes.WAIT:
-            return <Wait />
+            return <Wait {...props}/>
     }
 }
 
-export const LooksSelector = (name) => {
+export const LooksSelector = (name, props) => {
     switch(name) {
         case LooksButtonTypes.SAY:
-            return <Say />
+            return <Say {...props}/>
         case LooksButtonTypes.NEXTCOSTUME:
-            return <NextCostume />
+            return <NextCostume {...props}/>
     }
 }
