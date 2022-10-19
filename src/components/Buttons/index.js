@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useStoreActions } from 'easy-peasy';
+import React, { useEffect, useState } from 'react';
 import { useDrag } from 'react-dnd';
 import { ButtonTypes } from '../constants';
 import * as selectors from './selectors';
@@ -25,7 +26,17 @@ const Button = ({
     ...props
 }) => {
     const selector = selectSelector(type)
+    const {changeButtonValue} = useStoreActions(action => action)
     const [value, setValue] = useState(props.value)
+    useEffect(() => {
+        if(props.stripeId !== undefined){
+            changeButtonValue({
+                stripeId: props.stripeId,
+                buttonId: id,
+                value
+            })
+        }
+    }, [value])
     const [{isDragging}, drag] = useDrag(() => ({
         type: type,
         item: {

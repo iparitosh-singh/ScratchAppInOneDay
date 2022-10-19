@@ -1,16 +1,38 @@
-import { ButtonTypes } from "./components/constants"
+import { ButtonTypes, MotionButtonTypes } from "./components/constants"
+
+
 export const getClasses = (buttons) => {
-    const buttonArr = Object.values(buttons).map(button => {
+    return Object.values(buttons)
+    .map(button => {
         return button
-    }).slice().sort((button) => button.top)
-    const classes = buttonArr.map(button => {
+    })
+    .slice().sort((button) => button.top)
+    .reduce((styles, button) => {
         switch(button.type) {
             case ButtonTypes.MOTION:
-                return {
-                    transition: '3s',
-                    
+            {
+                switch(button.name) {
+                    case MotionButtonTypes.MOVE:
+                        return {
+                            ...styles, 
+                            transform: styles.transform ? styles.transform + ` translate(${button.value}px)` :`translate(${button.value}px)`  
+                        }
+                    case MotionButtonTypes.LEFT:
+                        return {
+                            ... styles,
+                            transform: styles.transform ? styles.transform + ` rotate(${button.value}deg)` : `rotate(${button.value}deg)`
+                        }
+                    case MotionButtonTypes.RIGHT:
+                        return {
+                            ... styles,
+                            transform: styles.transform ? styles.transform + ` rotate(${-button.value}deg)` : `rotate(${-button.value}deg)`
+                        }
+                    default:
+                        return styles
                 }
-                
+            }
+            default:
+                return styles
         }
-    })
+    }, {})
 }

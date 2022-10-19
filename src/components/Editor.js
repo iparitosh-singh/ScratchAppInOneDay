@@ -6,14 +6,15 @@ import Button from './Buttons'
 import { ButtonTypes } from './constants'
 
 const getButton = (button, key) => {
-    const {left, top, name, type, value} = button
+    const {left, top, name, type, value, stripeId} = button
     const props = {
         name,
         pos: {left, top},
         key,
         id: key,
         isInside: true,
-        value
+        value,
+        stripeId
     }
     switch(type) {
         case ButtonTypes.MOTION:
@@ -46,6 +47,7 @@ const Editor = () => {
                 type: type,
                 name: item.name,
                 value: item.value,
+                stripeId: selectedStripeId
             }
         }
         setStripeButtons({

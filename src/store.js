@@ -25,6 +25,12 @@ const store = createStore({
             return id === stripe.id ? (stripe.buttons = {...stripe.buttons, ...button }) : stripe
         })
     }),
+    changeButtonValue: action((state, payload) => {
+        const {value, stripeId, buttonId} = payload
+        state.stripes.forEach(stripe => {
+            return stripeId === stripe.id ? (stripe.buttons[buttonId].value = value) : stripe
+        })
+    }),
     updateStripePosition: action((state, payload) => {
         const {left, top, id} = payload
         
