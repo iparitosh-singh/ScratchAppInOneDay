@@ -54,7 +54,8 @@ export default function PreviewArea() {
       component: STRIPES[randomIdx],
       buttons: {},
       top: 0, left: 0,
-      id,
+      id, 
+      classes: {transition: 'transform .8s ease-in-out'} 
     }
     addStripe(newStripe)
     setSelectedStripe(id)

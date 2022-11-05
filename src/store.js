@@ -8,7 +8,8 @@ const store = createStore({
         component: <CatSprite />,
         top: 0, 
         left: 0,
-        buttons: {} 
+        buttons: {},
+        classes: {transition: 'transform .8s ease-in-out'} 
     }],
     selectedStripeId: 0,
 
@@ -42,7 +43,13 @@ const store = createStore({
             return stripe  
         })
 
-    }) 
+    }),
+    updateStripeClasses: action((state, payload) => {
+        const {stripeId, classes} = payload
+        state.stripes.forEach(stripe => {
+            return stripeId === stripe.id ? (stripe.classes = {...stripe.classes, ...classes}) : stripe
+        })
+    })
 })
 
 export default store

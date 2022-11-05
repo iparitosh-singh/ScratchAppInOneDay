@@ -4,14 +4,14 @@ import {useDrop} from 'react-dnd'
 
 import Button from './Buttons'
 import { ButtonTypes } from './constants'
+import { getClasses } from '../animateStripe'
 
-const getButton = (button, key) => {
+const getButton = (button, id) => {
     const {left, top, name, type, value, stripeId} = button
     const props = {
         name,
         pos: {left, top},
-        key,
-        id: key,
+        id,
         isInside: true,
         value,
         stripeId
@@ -30,7 +30,7 @@ const getButton = (button, key) => {
 
 const Editor = () => {
     const { stripes, selectedStripeId} = useStoreState(state => state)
-    const {setStripeButtons} = useStoreActions(action => action)
+    const {setStripeButtons, updateStripeClasses} = useStoreActions(action => action)
     const buttons = stripes.find(stripe => stripe.id === selectedStripeId).buttons;
 
     const addButtonToEditor = (item, pos, type) => {
@@ -55,6 +55,16 @@ const Editor = () => {
             button: {
                 ...buttonPosition,
             }
+        })
+    }
+
+    const handleButtonClick = (buttonId) => {
+        const stripe = stripes.find((stripe) => stripe.id === selectedStripeId)
+        const button = stripe.buttons[buttonId]
+        console.log({[`${buttonId}`]: button})
+        updateStripeClasses({
+            classes: getClasses({[`${buttonId}`]: button}),
+            stripeId: selectedStripeId 
         })
     }
 
@@ -86,7 +96,11 @@ const Editor = () => {
             ref={drop}
         >
         {buttons && Object.keys(buttons).map((button) => {
-            return(getButton(buttons[button], button))
+            return(
+                <div onClick={() => handleButtonClick(button)} key={button}>
+                {getButton(buttons[button], button)}
+                </div>
+                )
         })}
         </div>
     )
