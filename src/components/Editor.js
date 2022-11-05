@@ -63,7 +63,7 @@ const Editor = () => {
         const button = stripe.buttons[buttonId]
         console.log({[`${buttonId}`]: button})
         updateStripeClasses({
-            classes: getClasses({[`${buttonId}`]: button}),
+            classes: getClasses({[`${buttonId}`]: button}, stripe.classes),
             stripeId: selectedStripeId 
         })
     }

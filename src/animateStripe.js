@@ -1,43 +1,6 @@
 import { ButtonTypes, LooksButtonTypes, MotionButtonTypes } from "./components/constants"
 
-export const animateButton = (button) => {
-    switch (button.type) {
-        case ButtonTypes.MOTION:
-            {
-                switch (button.name) {
-                    case MotionButtonTypes.MOVE:
-                        return {
-                            ...styles,
-                            transform: styles.transform ? styles.transform + ` translate(${button.value * 10}px)` : `translate(${button.value}px)`
-                        }
-                    case MotionButtonTypes.LEFT:
-                        return {
-                            ...styles,
-                            transform: styles.transform ? styles.transform + ` rotate(${button.value}deg)` : `rotate(${button.value}deg)`
-                        }
-                    case MotionButtonTypes.RIGHT:
-                        return {
-                            ...styles,
-                            transform: styles.transform ? styles.transform + ` rotate(${-button.value}deg)` : `rotate(${-button.value}deg)`
-                        }
-                    default:
-                        return styles
-                }
-            }
-        case ButtonTypes.LOOKS:
-        case LooksButtonTypes.SAY:
-            setTimeout(() => {
-                alert(`Stipe said ${button.value}`)
-            }, 1000)
-            return {
-                ...styles,
-            }
-        default:
-            return styles
-    }
-}
-
-export const getClasses = (buttons) => {
+export const getClasses = (buttons, originalStyles) => {
     return Object.values(buttons)
     .map(button => {
         return button
@@ -51,7 +14,7 @@ export const getClasses = (buttons) => {
                     case MotionButtonTypes.MOVE:
                         return {
                             ...styles, 
-                            transform: styles.transform ? styles.transform + ` translate(${button.value * 10}px)` :`translate(${button.value}px)`  
+                            transform: styles.transform ? styles.transform + ` translate(${button.value*5}px)` :`translate(${button.value*5}px)`  
                         }
                     case MotionButtonTypes.LEFT:
                         return {
@@ -78,5 +41,5 @@ export const getClasses = (buttons) => {
             default:
                 return styles
         }
-    }, {})
+    }, originalStyles) 
 }
